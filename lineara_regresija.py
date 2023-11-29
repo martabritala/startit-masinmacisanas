@@ -4,6 +4,7 @@ from termcolor import colored as cl # teksta izvade
 import matplotlib.pyplot as plt # vizualizācija
 import seaborn as sb # vizualizācija
 import pickle
+from PIL import Image
 
 from sklearn.model_selection import train_test_split # data split
 
@@ -88,11 +89,11 @@ kol_x2 = ['horsepower','curb-weight','engine-size','peak-rpm']
 kol_y2 = 'price'
 
 # Sagatavojam datus no datnes
-X_train, X_test, y_train, y_test = sagatavot_datus(datne2, kol_x2, kol_y2)
+X_train, X_test, y_train, y_test = sagatavot_datus(datne1, kol_x1, kol_y1)
 
 
 # vienkārša lineārā regresija
-# modelis = LinearRegression()
+modelis = LinearRegression()
 # Citi algoritmi ko var lietot:
 # # 2. Ridge
 # modelis = Ridge(alpha = 0.5)
@@ -103,7 +104,7 @@ X_train, X_test, y_train, y_test = sagatavot_datus(datne2, kol_x2, kol_y2)
 # # 5. ElasticNet
 # modelis = ElasticNet(alpha = 0.01)
 # Labāks algoritms
-modelis = ensemble.GradientBoostingRegressor(n_estimators = 400, max_depth = 5, min_samples_split = 2, learning_rate = 0.1, loss = 'ls')
+# modelis = ensemble.GradientBoostingRegressor(n_estimators = 400, max_depth = 5, min_samples_split = 2, learning_rate = 0.1, loss = 'ls')
 
 modelis, rezultats = trenet_modeli(modelis, X_train, y_train, X_test)
 # # Ja gribam saglabāt modeli datnē
@@ -116,8 +117,8 @@ dati1_rez = 90
 dati2 = [102,2337,109,5500]
 dati2_rez = 13950
 
-prognoze = prognozejam_rezultatu(modelis, [dati2])
-print(prognoze, dati2_rez)
+prognoze = prognozejam_rezultatu(modelis, [dati1])
+print(prognoze, dati1_rez)
 
 # print("Ielādējam modeli no datnes")
 # modelis2 = ieladet_modeli("modelis.pickle")
